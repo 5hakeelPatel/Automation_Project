@@ -34,5 +34,12 @@ tar -cvf /tmp/$user-httpd-logs-$timestamp.tar  /var/log/apache2/*.log
              #backing up log all files
 aws s3 cp /tmp/ $s3_bucket  --recursive --exclude "*" --include "*.tar"
 
-
+#Bookkeeping
+if [ -e /var/www/html/inventory.html ]
+then
+echo "<br>httpd-logs &nbsp;&nbsp;&nbsp; ${timestamp} &nbsp;&nbsp;&nbsp; tar &nbsp;&nbsp;&nbsp; ${size}" >> /var/www/html/inventory.html
+else
+echo "<b>Log Type &nbsp;&nbsp;&nbsp;&nbsp; Date Created &nbsp;&nbsp;&nbsp;&nbsp; Type &nbsp;&nbsp;&nbsp;&nbsp; Size</b><br>" > /var/www/html/inventory.html
+echo "<br>httpd-logs &nbsp;&nbsp;&nbsp; ${timestamp} &nbsp;&nbsp;&nbsp; tar &nbsp;&nbsp;&nbsp; ${size}" >> /var/www/html/inventory.html
+fi
 
