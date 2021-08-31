@@ -43,3 +43,13 @@ echo "<b>Log Type &nbsp;&nbsp;&nbsp;&nbsp; Date Created &nbsp;&nbsp;&nbsp;&nbsp;
 echo "<br>httpd-logs &nbsp;&nbsp;&nbsp; ${timestamp} &nbsp;&nbsp;&nbsp; tar &nbsp;&nbsp;&nbsp; ${size}" >> /var/www/html/inventory.html
 fi
 
+
+if [ -e /etc/cron.d/automation ]
+	then 
+	echo "Corn Job is available will run once a day "
+else 
+	echo "59 23 * * * root /root/Automation_Project/automation.sh" > /etc/cron.d/automation
+
+fi
+
+
